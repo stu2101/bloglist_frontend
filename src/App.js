@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 // components
 import LoginForm from './components/LoginForm'
@@ -20,11 +20,15 @@ const App = () => {
     const [msgType, setMsgType] = useState("")
     const [msgText, setMsgText] = useState(null)
 
+    const blogFormRef = useRef()
+
     const createBlog = async (event) => {
         event.preventDefault()
 
+        blogFormRef.current.toggleVisibility()
         const newBlog = await blogService.create(blog)
         setBlogs(blogs.concat(newBlog))
+        setBlog({})
 
         setMsgText("Blog added successfully")
         setTimeout(() => {
@@ -93,6 +97,7 @@ const App = () => {
                 />
             ) : (
                 <Blogs
+                    blogFormRef={blogFormRef}
                     blog={blog}
                     setBlog={setBlog}
                     createBlog={createBlog}
