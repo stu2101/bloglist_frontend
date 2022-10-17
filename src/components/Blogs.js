@@ -76,8 +76,9 @@ const Blogs = (props) => {
                 </form>
             </Togglable>
 
-            {
-                props.blogs.map(blog =>
+            {props.blogs
+                .sort((a, b) => b.likes - a.likes)
+                .map(blog =>
                     <Blog
                         key={blog.id}
                         blog={blog}
