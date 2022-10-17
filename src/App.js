@@ -15,20 +15,17 @@ const App = () => {
     const [password, setPassword] = useState("")
 
     const [blogs, setBlogs] = useState([])
-    const [blog, setBlog] = useState({})
 
     const [msgType, setMsgType] = useState("")
     const [msgText, setMsgText] = useState(null)
 
     const blogFormRef = useRef()
 
-    const createBlog = async (event) => {
-        event.preventDefault()
-
+    const createBlog = async (blogObject) => {
         blogFormRef.current.toggleVisibility()
-        const newBlog = await blogService.create(blog)
+        const newBlog = await blogService.create(blogObject)
+
         setBlogs(blogs.concat(newBlog))
-        setBlog({})
 
         setMsgText("Blog added successfully")
         setTimeout(() => {
@@ -98,8 +95,6 @@ const App = () => {
             ) : (
                 <Blogs
                     blogFormRef={blogFormRef}
-                    blog={blog}
-                    setBlog={setBlog}
                     createBlog={createBlog}
                     onClickLogout={logOut}
                     user={user}

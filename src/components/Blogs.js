@@ -1,12 +1,20 @@
+import { useState } from "react"
 import Blog from "./Blog"
 import Togglable from "./Togglable"
 
 const Blogs = (props) => {
+    const [newBlog, setNewBlog] = useState({})
 
     const clearInputs = () => {
         document.getElementById("title").value = ""
         document.getElementById("author").value = ""
         document.getElementById("url").value = ""
+    }
+
+    const addBlog = (event) => {
+        event.preventDefault()
+        props.createBlog(newBlog)
+        setNewBlog({})
     }
 
     return (
@@ -21,7 +29,7 @@ const Blogs = (props) => {
 
             <Togglable buttonLabel="new blog" ref={props.blogFormRef}>
                 <h2>create new</h2>
-                <form onSubmit={props.createBlog}>
+                <form onSubmit={addBlog}>
                     <div>
                         title:
                         <input
@@ -30,8 +38,8 @@ const Blogs = (props) => {
                             id="title"
                             onChange={
                                 ({ target }) => {
-                                    props.setBlog({ ...props.blog, title: target.value })
-                                    console.log(props.blog);
+                                    setNewBlog({ ...newBlog, title: target.value })
+                                    console.log(newBlog);
                                 }
                             }
                         />
@@ -44,8 +52,8 @@ const Blogs = (props) => {
                             id="author"
                             onChange={
                                 ({ target }) => {
-                                    props.setBlog({ ...props.blog, author: target.value })
-                                    console.log(props.blog);
+                                    setNewBlog({ ...newBlog, author: target.value })
+                                    console.log(newBlog);
                                 }
                             }
                         />
@@ -58,8 +66,8 @@ const Blogs = (props) => {
                             id="url"
                             onChange={
                                 ({ target }) => {
-                                    props.setBlog({ ...props.blog, url: target.value })
-                                    console.log(props.blog);
+                                    setNewBlog({ ...newBlog, url: target.value })
+                                    console.log(newBlog);
                                 }
                             }
                         />
