@@ -33,6 +33,12 @@ const App = () => {
         }, 3500)
     }
 
+    const deleteBlog = async (blogObject) => {
+        await blogService.remove(blogObject.id)
+
+        setBlogs(blogs.filter(blog => blog.id !== blogObject.id))
+    }
+
     const handleLogin = async (event) => {
         event.preventDefault()
         try {
@@ -99,6 +105,7 @@ const App = () => {
                     onClickLogout={logOut}
                     user={user}
                     blogs={blogs}
+                    deleteBlog={deleteBlog}
                 />
             )
             }

@@ -83,6 +83,7 @@ const Blogs = (props) => {
                         key={blog.id}
                         blog={blog}
                         user={props.user}
+                        deleteBlog={props.deleteBlog}
                     />
                 )
             }
