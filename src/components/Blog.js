@@ -36,7 +36,7 @@ const Blog = ({ blog, user, deleteBlog }) => {
                 :
                 <div className="title-and-author">
                     {blog.title} {blog.author} <span></span>
-                    <button onClick={() => setVisible(!visible)}>
+                    <button className="buttonShow" onClick={() => setVisible(!visible)}>
                         show
                     </button>
                 </div>

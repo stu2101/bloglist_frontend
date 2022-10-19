@@ -4,20 +4,22 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Blog from "./Blog"
 
+const user = {
+    username: "test username",
+    name: "test name"
+}
+
 const blog = {
     title: "test title",
     author: "test author",
     url: "test url",
     likes: 5,
     user: {
-        username: "test username"
+        user
     }
 }
 
-const user = {
-    username: "test username",
-    name: "test name"
-}
+
 
 test("By default, only the blog's title and author are displayed", async () => {
     const { container } = render(<Blog blog={blog} user={user} />)
@@ -29,13 +31,18 @@ test("By default, only the blog's title and author are displayed", async () => {
     expect(details).toBe(null)
 })
 
-test("The blog's url and number of likes appear when the \"show\" button is clicked", () => {
+test("The blog's url and number of likes appear when the \"show\" button is clicked", async () => {
     const { container } = render(<Blog blog={blog} user={user} />)
+
+    const mockUser = userEvent.setup()
+    const buttonShow = container.querySelector(".buttonShow")
+
+    await mockUser.click(buttonShow)
 
     const titleAndAuthor = container.querySelector(".title-and-author")
     const details = container.querySelector(".details")
 
-    expect(titleAndAuthor.textContent).toBe(`${blog.title} ${blog.author} show`)
-    expect(details).toBe(null)
+    expect(titleAndAuthor).toBe(null)
+    expect(details.textContent).toContain(blog.title, blog.author, blog.url, blog.likes, blog.user.name)
 })
 
