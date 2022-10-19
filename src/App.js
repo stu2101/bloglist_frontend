@@ -53,6 +53,7 @@ const App = () => {
                 setMsgType("")
             }, 3500)
         }
+
     }
 
     const logOut = (event) => {

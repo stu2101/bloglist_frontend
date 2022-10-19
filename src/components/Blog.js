@@ -1,7 +1,7 @@
 import { useState } from "react"
 import blogService from "../services/blogs"
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, user }) => {
     const [visible, setVisible] = useState(false)
     const [likes, setLikes] = useState(blog.likes)
 
@@ -14,27 +14,40 @@ const Blog = ({ blog }) => {
     }
 
     const increaseLikes = () => {
-        const updatedLikes = {...blog, likes: likes + 1}
-
-        console.log(updatedLikes);
+        const updatedLikes = { ...blog, likes: likes + 1 }
         blogService.update(blog.id, updatedLikes)
         setLikes(likes + 1)
     }
 
+    const deleteBlog = async () => {
+        await blogService.remove(blog.id) 
+    }
+
+    // since each user must have a unique username, we use the username
+    // to determine is the current user is the creator of the blog
+    const isUser = blog.user.username === user.username
+
     return (
-        <div>
+        <div style={blogStyle}>
+
             {visible ?
-                <div style={blogStyle}>
+                <div>
                     <div>{blog.title} {blog.author} <button onClick={() => { setVisible(!visible) }}>hide</button></div>
                     <div>{blog.url}</div>
                     <div>likes {likes} <button onClick={increaseLikes}> like </button> </div>
                     <div>{blog.user.name}</div>
                 </div>
                 :
-                <div style={blogStyle}>
+                <div>
                     {blog.title} {blog.author} <button onClick={() => setVisible(!visible)}>show</button>
                 </div>
             }
+            {isUser ?
+                <div>
+                    <button onClick={deleteBlog}>remove</button>
+                </div>
+                :
+                null}
         </div>
     )
 }

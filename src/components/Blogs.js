@@ -82,6 +82,7 @@ const Blogs = (props) => {
                     <Blog
                         key={blog.id}
                         blog={blog}
+                        user={props.user}
                     />
                 )
             }
