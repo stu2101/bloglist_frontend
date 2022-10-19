@@ -62,7 +62,7 @@ const App = () => {
 
     }
 
-    const logOut = (event) => {
+    const logOut = () => {
         window.localStorage.removeItem("loggedBlogappUser")
 
         // Calling setUser() modifies the state of the component, causing it to re-render.
