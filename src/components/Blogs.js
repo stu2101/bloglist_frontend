@@ -27,12 +27,17 @@ const Blogs = (props) => {
                 >logout</button>
             </p>
 
-            <Togglable buttonLabel="new blog" ref={props.blogFormRef}>
+            <Togglable
+                buttonLabel="new blog"
+                ref={props.blogFormRef}
+                className="buttonNewBlog"
+            >
                 <h2>create new</h2>
                 <form onSubmit={addBlog}>
                     <div>
                         title:
                         <input
+                            className="inputTitle"
                             type="text"
                             name="title"
                             id="title"
@@ -47,6 +52,7 @@ const Blogs = (props) => {
                     <div>
                         author:
                         <input
+                            className="inputAuthor"
                             type="text"
                             name="author"
                             id="author"
@@ -61,6 +67,7 @@ const Blogs = (props) => {
                     <div>
                         url:
                         <input
+                            className="inputUrl"
                             type="text"
                             name="url"
                             id="url"
@@ -72,7 +79,10 @@ const Blogs = (props) => {
                             }
                         />
                     </div>
-                    <button type="submit" onClick={clearInputs}>create</button>
+                    <button
+                        className="buttonCreate"
+                        type="submit"
+                        onClick={clearInputs}>create</button>
                 </form>
             </Togglable>
 

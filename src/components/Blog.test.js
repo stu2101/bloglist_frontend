@@ -46,3 +46,12 @@ test("The blog's url and number of likes appear when the \"show\" button is clic
     expect(details.textContent).toContain(blog.title, blog.author, blog.url, blog.likes, blog.user.name)
 })
 
+test("when the like button is clicked twice, the event handler is called twice", async () => {
+    const { container } = render(<Blog blog={blog} user={user} />)
+
+    const buttonLike = container.querySelector(".buttonLike")
+    const mockUser = userEvent.setup()
+    const mockInscreaseLikes = jest.fn()
+
+})
+
