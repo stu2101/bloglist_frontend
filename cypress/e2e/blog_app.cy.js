@@ -62,7 +62,7 @@ describe('Blog app', function () {
             cy.contains("another blog")
         })
 
-        it.only("users can like a blog", function () {
+        it("users can like a blog", function () {
             cy.contains("first blog")
                 .contains("show").click()
 
@@ -72,6 +72,39 @@ describe('Blog app', function () {
 
             cy.get(".details")
                 .contains("likes 1")
+        })
+
+        it("only the blogs created by the user can be deleted", function () {
+            cy.get("#logoutButton").click()
+
+            const newUser = {
+                name: 'newTest',
+                username: 'newTest',
+                password: 'newTest'
+            }
+
+            const newBlog = {
+                title: "blog created by new user",
+                author: "newTest",
+                url: "newTest"
+            }
+
+            cy.request("POST", "http://localhost:3003/api/users", newUser)
+
+            cy.login({ username: newUser.username, password: newUser.password })
+            cy.createBlog(newBlog)
+
+            cy.contains("first blog")
+                .parent()
+                .should("not.contain", "remove")
+
+            cy.contains(newBlog.title)
+                .parent()
+                .contains("remove")
+                .should("have.id", "removeButton")
+                .click()
+
+            cy.get("html").should("not.contain", newBlog.title)
         })
     })
 })

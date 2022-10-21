@@ -46,7 +46,11 @@ const Blog = ({ blog, user, deleteBlog }) => {
             }
             {isUser ?
                 <div>
-                    <button onClick={() => deleteBlog(blog)}>remove</button>
+                    <button
+                        id="removeButton"
+                        onClick={() => deleteBlog(blog)}>
+                        remove
+                    </button>
                 </div>
                 :
                 null}
