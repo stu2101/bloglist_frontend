@@ -23,6 +23,7 @@ const Blogs = (props) => {
             <p>
                 {props.user.name} logged in
                 <button
+                    id="logoutButton"
                     onClick={props.onClickLogout}
                 >logout</button>
             </p>
