@@ -106,5 +106,30 @@ describe('Blog app', function () {
 
             cy.get("html").should("not.contain", newBlog.title)
         })
+
+        it("blogs are sorted according to likes", function () {
+
+            cy.contains("second blog")
+                .contains("show").click()
+                .get(".details")
+                .get(".buttonLike")
+                .click().click().click()
+                .parent().parent()
+                .contains("hide")
+                .click()
+
+            cy.contains("third blog")
+                .contains("show").click()
+                .get(".details")
+                .get(".buttonLike")
+                .click()
+
+            cy.reload()
+                .login({ username: "test", password: "test" })
+
+            cy.get('.title-and-author').eq(0).should('contain', 'second blog')
+            cy.get('.title-and-author').eq(1).should('contain', 'third blog')
+            cy.get('.title-and-author').eq(2).should('contain', 'first blog')
+        })
     })
 })
