@@ -42,6 +42,7 @@ describe('Blog app', function () {
             cy.login({ username: "test", password: "test" })
             cy.createBlog({ title: "first blog", author: "test", url: "test" })
             cy.createBlog({ title: "second blog", author: "test", url: "test" })
+            cy.createBlog({ title: "third blog", author: "test", url: "test" })
         })
 
         it('a blog can be created', function () {
@@ -61,6 +62,16 @@ describe('Blog app', function () {
             cy.contains("another blog")
         })
 
+        it.only("users can like a blog", function () {
+            cy.contains("first blog")
+                .contains("show").click()
 
+            cy.get(".details")
+                .contains("likes 0")
+                .get(".buttonLike").click()
+
+            cy.get(".details")
+                .contains("likes 1")
+        })
     })
 })
