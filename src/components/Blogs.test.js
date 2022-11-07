@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Blogs from "./Blogs";
 
-test.only("the form calls the event handler it received as props with the right details when a new blog is created.", async () => {
+test("the form calls the event handler it received as props with the right details when a new blog is created.", async () => {
     const user = {
         username: "test username",
         name: "test name"

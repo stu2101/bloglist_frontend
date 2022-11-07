@@ -1,7 +1,7 @@
 import { useState } from "react"
 import blogService from "../services/blogs"
 
-const Blog = ({ blog, user, deleteBlog }) => {
+const Blog = ({ blog, user, deleteBlog, increaseLikesTest }) => {
     const [visible, setVisible] = useState(false)
     const [likes, setLikes] = useState(blog.likes)
 
@@ -19,6 +19,10 @@ const Blog = ({ blog, user, deleteBlog }) => {
         setLikes(likes + 1)
     }
 
+    const testLikes = () => {
+        increaseLikesTest()
+    }
+
     // since each user must have a unique username, we use the username
     // to determine is the current user is the creator of the blog
     const isUser = blog.user.username === user.username
@@ -32,7 +36,7 @@ const Blog = ({ blog, user, deleteBlog }) => {
                     <div>{blog.url}</div>
                     <div>
                         likes {likes} <span></span>
-                        <button className="buttonLike" onClick={increaseLikes}> like </button>
+                        <button className="buttonLike" onClick={increaseLikesTest === undefined ? increaseLikes : testLikes}> like </button>
                     </div>
                     <div>{blog.user.name}</div>
                 </div>

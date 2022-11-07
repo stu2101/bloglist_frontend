@@ -47,11 +47,19 @@ test("The blog's url and number of likes appear when the \"show\" button is clic
 })
 
 test("when the like button is clicked twice, the event handler is called twice", async () => {
-    const { container } = render(<Blog blog={blog} user={user} />)
-
-    const buttonLike = container.querySelector(".buttonLike")
     const mockUser = userEvent.setup()
     const mockInscreaseLikes = jest.fn()
+    const { container } = render(<Blog blog={blog} user={user} increaseLikesTest={mockInscreaseLikes}/>)
+
+    const buttonShow = container.querySelector(".buttonShow")
+    await mockUser.click(buttonShow)
+
+    const buttonLike = container.querySelector(".buttonLike")
+    await mockUser.click(buttonLike)
+    await mockUser.click(buttonLike)
+
+    expect(mockInscreaseLikes.mock.calls).toHaveLength(2)
+
 
 })
 
