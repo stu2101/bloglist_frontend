@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/bloglist-frontend/static/css/main.d8b8c395.css",
+    "main.js": "/bloglist-frontend/static/js/main.4e77e2f9.js",
+    "index.html": "/bloglist-frontend/index.html",
+    "main.d8b8c395.css.map": "/bloglist-frontend/static/css/main.d8b8c395.css.map",
+    "main.4e77e2f9.js.map": "/bloglist-frontend/static/js/main.4e77e2f9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d8b8c395.css",
+    "static/js/main.4e77e2f9.js"
+  ]
+}
